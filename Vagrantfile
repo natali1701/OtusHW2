@@ -1,5 +1,3 @@
-home = ENV['HOME']
-
 MACHINES = {
   :otuslinux => {
         :box_name => "centos/7",
