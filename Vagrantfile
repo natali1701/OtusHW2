@@ -1,3 +1,6 @@
+# -*- mode: ruby -*-
+# vim: set ft=ruby :
+
 MACHINES = {
   :otuslinux => {
         :box_name => "centos/7",
