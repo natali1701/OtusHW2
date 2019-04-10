@@ -21,24 +21,30 @@ Vagrant 2.2.4
 centos/7 (virtualbox, 1902.01)
 
 #ls -a
-- .  ..  .gitignore  sata1.vdi  sata2.vdi  sata3.vdi  sata4.vdi  sata5.vdi  .vagrant  Vagrantfile
+
+ .  ..  .gitignore  sata1.vdi  sata2.vdi  sata3.vdi  sata4.vdi  sata5.vdi  .vagrant  Vagrantfile
 
 Создан Vagrantfile(приложен к OtusHW2 с добавленными дисками), значит можем поднимать нашу виртуальную машину. 
 
 #vagrant up
 
 Далее проверим поднялась ли машина:
+
 #vagrant status
+
 Current machine states:
 
 otuslinux                 running (virtualbox)
 
 Все работает корректно, можно подлючиться к ней:
+
 #vagrant ssh
+
 Last login: Tue Apr  9 09:37:23 2019 from 10.0.2.2
 [vagrant@otuslinux ~]$ 
 
 Видим что все прошло корректно:
+
 [vagrant@otuslinux ~]$ lsscsi
 [0:0:0:0]    disk    ATA      VBOX HARDDISK    1.0   /dev/sda 
 [3:0:0:0]    disk    ATA      VBOX HARDDISK    1.0   /dev/sdb 
@@ -50,9 +56,11 @@ Last login: Tue Apr  9 09:37:23 2019 from 10.0.2.2
 # 2.Работа с mdadm, сборка RAID
 
 Собираем из дисков RAID.Мы выбрали RAID 5.Опция -l какого уровня RAID создавать,опция - n указывает на кол-во устройств в RAID:
+
 #mdadm --create --verbose /dev/md0 -l 5 -n 5 /dev/sd{b,c,d,e,f}
 
 Смотрим состояние рэйда после сборки:
+
 [vagrant@otuslinux ~]$ cat /proc/mdstat 
 Personalities : [raid6] [raid5] [raid4] 
 md0 : active raid5 sdf[5] sde[6] sdd[2] sdc[1] sdb[0]
@@ -63,19 +71,26 @@ unused devices: <none>
 # 3.Работа с mdadm, поломать/починить RAID5
 
 Ломаем:
+
 [vagrant@otuslinux ~]$ sudo mdadm /dev/md0 --fail /dev/sde
 mdadm: set /dev/sde faulty in /dev/md0
 
 Видно что помечен теперь как попорченный:
+
 [vagrant@otuslinux ~]$ watch cat /proc/mdstat
+
 Personalities : [raid6] [raid5] [raid4]
+
 md0 : active raid5 sdf[5] sde[6](F) sdd[2] sdc[1] sdb[0]
       1015808 blocks super 1.2 level 5, 512k chunk, algorithm 2 [5/4] [UUU_U]
 
 Уберем его, чтобы заменить на новый:
+
 [vagrant@otuslinux ~]$ sudo mdadm /dev/md0 --remove /dev/sde
+
 [vagrant@otuslinux ~]$ sudo mdadm /dev/md0 --add /dev/sde
 mdadm: added /dev/sde
+
 [vagrant@otuslinux ~]$ cat /proc/mdstat 
 Personalities : [raid6] [raid5] [raid4] 
 md0 : active raid5 sde[6] sdf[5] sdd[2] sdc[1] sdb[0]
