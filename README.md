@@ -12,26 +12,26 @@
 
 ## 1. Работа с Vagrant
 
-# vagrant -v
+#vagrant -v
 Vagrant 2.2.4
 
-# vagrant box list
+#vagrant box list
 centos/7 (virtualbox, 1902.01)
 
-# ls -a
+#ls -a
 .  ..  .gitignore  sata1.vdi  sata2.vdi  sata3.vdi  sata4.vdi  sata5.vdi  .vagrant  Vagrantfile
 
 Создан Vagrantfile(приложен к OtusHW2 с добавленными дисками), значит можем поднимать нашу виртуальную машину. 
-# vagrant up
+#vagrant up
 
 Далее проверим поднялась ли машина:
-# vagrant status
+#vagrant status
 Current machine states:
 
 otuslinux                 running (virtualbox)
 
 Все работает корректно, можно подлючиться к ней:
-# vagrant ssh
+#vagrant ssh
 Last login: Tue Apr  9 09:37:23 2019 from 10.0.2.2
 [vagrant@otuslinux ~]$ 
 
