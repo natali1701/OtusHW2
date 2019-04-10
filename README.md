@@ -122,7 +122,7 @@ md0 : active raid5 sde[6] sdf[5] sdd[2] sdc[1] sdb[0]
 unused devices: <none>
 
 
-**RAID снова собран успешно:**
+**Процесс rebuild-а окончен успешно:**
 
 [vagrant@otuslinux ~]$ cat /proc/mdstat 
 
