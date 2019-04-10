@@ -13,15 +13,18 @@
 ## 1. Работа с Vagrant
 
 #vagrant -v
+
 Vagrant 2.2.4
 
 #vagrant box list
+
 centos/7 (virtualbox, 1902.01)
 
 #ls -a
-.  ..  .gitignore  sata1.vdi  sata2.vdi  sata3.vdi  sata4.vdi  sata5.vdi  .vagrant  Vagrantfile
+- .  ..  .gitignore  sata1.vdi  sata2.vdi  sata3.vdi  sata4.vdi  sata5.vdi  .vagrant  Vagrantfile
 
 Создан Vagrantfile(приложен к OtusHW2 с добавленными дисками), значит можем поднимать нашу виртуальную машину. 
+
 #vagrant up
 
 Далее проверим поднялась ли машина:
